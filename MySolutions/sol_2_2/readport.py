@@ -1,7 +1,7 @@
 import csv
 from pprint import pprint
 from collections import Counter
-from readrides import read_rides
+from sol_2_1.readrides import read_rides
 
 # A function that reads a file into a list of dicts
 def read_portfolio(filename):
