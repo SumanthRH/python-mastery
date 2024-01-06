@@ -59,4 +59,6 @@ s.get_something() # looks up and calls the method
 
 - Class variables: can be accessed at the class level or by an instance. Can also be changed via inheritance.
 
-- Class Method is a method that operates on the class itself. It's invoked on the class, not an instance
+- Class Method is a method that operates on the class itself. It's invoked on the class, not an instance. Example usecase is in providing alternate constructors. Most popular example of this is `AutoModel.from_pretrained` in 🤗Transformers.
+
+- Implicit conversion of data in `__init__()` can limit flexibility and might introduce weird bugs if a user isn't paying careful attention.
