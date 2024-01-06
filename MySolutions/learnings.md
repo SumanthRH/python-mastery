@@ -1,4 +1,7 @@
 
+# Learnings
+These are some notes and comments I've taken while going through the book. Many sentences here are copied verbatim from David's slides since I found them to be great summaries for different concepts.
+
 - Exercise 2.1: Reading data as a single string vs. reading data with f.readlines() has a huge difference in memory consumption - 10 MB vs 40 MB for an example file. 
 Point to ponder: what might be the source of that extra overhead?
     - > My guess is the additional information stored in a list data structure. 
@@ -36,6 +39,8 @@ predefined "protocols" - the name for the special methods like `__add__` and `__
 
 - `copy.deepcopy` is the only safe way to copy an object in python
 
+## Classes 
+
 - Object oriented programming is largely
 concerned with the modeling of "behavior." 
 
@@ -62,3 +67,21 @@ s.get_something() # looks up and calls the method
 - Class Method is a method that operates on the class itself. It's invoked on the class, not an instance. Example usecase is in providing alternate constructors. Most popular example of this is `AutoModel.from_pretrained` in 🤗Transformers.
 
 - Implicit conversion of data in `__init__()` can limit flexibility and might introduce weird bugs if a user isn't paying careful attention.
+
+## Python Encapsulation
+- Python has programming conventions to indicate the intended use of something. Ex. private and public methods aren't exactly enforced like in C++.
+- Attributes with a single underscore "_" are meant to act as private attributes (still accessible in instanecs and for subclasses)
+- Attributes with a double underscore "__" have a special meaning - these are not accessible to subclasses. They are acessible in instance via Python's name mangling trick Ex:
+```
+s = MyClass()
+s._MyClass__attr # to get __attr
+```
+- Properties in python: Useful alternative to accessor methods. Can also make sure a property is not stale/ computed when accessed. Note that a property is a _class variable_.
+- Property decorators:
+    - @property: to declare a property
+    - @<\pname>.setter: function that's invoked with assignment ops. Needed to modify a property
+    - @<\pname>.deleter: function that's invoked with deletion
+
+- Advice on `__slots__`:  Do not use it except with classes that are simply going to serve as simple data
+structures.
+
