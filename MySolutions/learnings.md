@@ -29,3 +29,34 @@ predefined "protocols" - the name for the special methods like `__add__` and `__
     ![container](container.png)
 
 - All "hashable" objects in python have a `__hash__()` and `__eq__()` method
+
+- Assignment operations never make a copy of the value being assigned - all assignments are merely reference copies
+
+- Immutable values can be safely shared, which can save a lot of memory (think a long list of dictionaries)
+
+- `copy.deepcopy` is the only safe way to copy an object in python
+
+- Object oriented programming is largely
+concerned with the modeling of "behavior." 
+
+- A class is a simply a set of functions that do different things on "instances"
+
+- Classes do not define a scope. If want to operate on an instance, you always have to refer to it explicitly
+
+- There are only three operations on an instance: 
+```
+obj.attr # Get an attribute
+obj.attr = value # Set an attribute
+del obj.attr # Delete an attribute - obj.attr no longer exists
+```
+- Method calls are layered onto the machinery used for simple attributes.
+```
+s.get_something # Looks up the method
+s.get_something() # looks up and calls the method
+```
+
+- Internally, a method call `s.method()` is implemented as `s.method.__func__(s.method.__self__)`
+
+- Class variables: can be accessed at the class level or by an instance. Can also be changed via inheritance.
+
+- Class Method is a method that operates on the class itself. It's invoked on the class, not an instance
