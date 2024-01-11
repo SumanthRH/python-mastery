@@ -85,3 +85,7 @@ s._MyClass__attr # to get __attr
 - Advice on `__slots__`:  Do not use it except with classes that are simply going to serve as simple data
 structures.
 
+- Inheritance in a nutshell: Extend existing code. That's it.
+    - `__init__` inheritance: you must also initialize the parents with `super().__init__()`
+    - objects defined via inheritance are a special version of the parent i.e same capabilities
+    - `object` is a parent of all classes in Python 3 (even if not specified)
