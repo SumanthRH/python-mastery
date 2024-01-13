@@ -133,3 +133,13 @@ holds data collectively shared by all instances
 - When you read an attribute, the attribute might be sitting in a local instance dictionary or the class dictionary: both might be checked (local first, then class)
 - class dictionary : access via instance - `obj.__class__` or directly via class `cls.__dict__`
 - A class is just a dictionary
+- With inheritance, the inheritance chain is precomputed and stored in an "MRO" (Method Resolution Object) attribute on the class - `cls.__mro__`
+- `super()` delegates to the next class on the MRO
+- ` super()` might not go to the
+immediate parent. It's different from doing `parent_cls.attr`
+- Designing for inheritance:
+
+    1. Rule 1: Compatible Method Arguments
+    2. Rule 2: Method chains must terminate
+    3. Rule 3: use `super()` everywhere
+        - If multiple inheritance is used, a direct parent call will probably violate the MRO
