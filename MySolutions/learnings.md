@@ -93,11 +93,19 @@ structures.
     - str(obj) - printable output
     - repr(obj) - for programmers
     - The convention for `__repr__` is to return a string that, when fed to `eval()` , will recreate the underlying object.
+    - print(obj) uses `__str__`
 - Item access: `__setitem__`, `__getitem__`, `__delitem__`, `__contains__`, `__len__`
 
 - Instances under the hood:
+    ```
+    d = Date.__new__(Date, 2012, 12, 21)
+    d.__init__(2012, 12, 21)
+    ```
+- `__del__` : destructor method. Called when the reference count reaches 0. It's not the same as the del operator.`del` decreases ref count by 1
 
-```
-d = Date.__new__(Date, 2012, 12, 21)
-d.__init__(2012, 12, 21)
-```
+- Weak Reference: A reference to an object that does not increase its reference count
+
+- Context managers: To be used with resources! That's it.
+`__enter__()` and `__exit__()`
+
+- Handler classes:  Code will implement a general purpose algorithm, but will defer certain steps to a separately supplied handler object (like the formatter implemented in 3.5)
