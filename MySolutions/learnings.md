@@ -119,4 +119,17 @@ structures.
 - If you have a class `Child(A, B)`, then the common methods of A and B can get "merged" when accessed via a Child instance! 
     - `super()` moves to the next class in the list of parents
 
-- **Mixin Classes:** A mixin is a class whose purpose is to add extra functionality to other class definitions. 
+- **Mixin Classes:** A mixin is a class whose purpose is to add extra functionality to other class definitions. For example, the creator of a library can provide a set of classes. Mixins are a collection of add-on classes that can be provided to make those classes behave in different ways.
+
+## Inside Python Objects
+- Dictionaries are used for critical parts of the interpreter and may be the most important type of data in Python.
+- Each instance gets its own private dictionary: `obj.__dict__`
+- "...the entire object system is mostly
+just an extra layer that's put on top of
+dictionaries.."
+- The instance dictionary (`__dict__`) holds data unique to
+each instance whereas the class dictionary (`__class__`)
+holds data collectively shared by all instances
+- When you read an attribute, the attribute might be sitting in a local instance dictionary or the class dictionary: both might be checked (local first, then class)
+- class dictionary : access via instance - `obj.__class__` or directly via class `cls.__dict__`
+- A class is just a dictionary
