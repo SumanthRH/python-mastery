@@ -85,6 +85,7 @@ s._MyClass__attr # to get __attr
 - Advice on `__slots__`:  Do not use it except with classes that are simply going to serve as simple data
 structures.
 
+## Inheritance
 - Inheritance in a nutshell: Extend existing code. That's it.
     - `__init__` inheritance: you must also initialize the parents with `super().__init__()`
     - objects defined via inheritance are a special version of the parent i.e same capabilities
@@ -109,3 +110,13 @@ structures.
 `__enter__()` and `__exit__()`
 
 - Handler classes:  Code will implement a general purpose algorithm, but will defer certain steps to a separately supplied handler object (like the formatter implemented in 3.5)
+
+## Advanced Inheritance and Mixins 
+- _Inheritance is a tool for code reuse_
+
+- _Python uses "cooperative multiple inheritance"_
+
+- If you have a class `Child(A, B)`, then the common methods of A and B can get "merged" when accessed via a Child instance! 
+    - `super()` moves to the next class in the list of parents
+
+- **Mixin Classes:** A mixin is a class whose purpose is to add extra functionality to other class definitions. 
