@@ -89,3 +89,15 @@ structures.
     - `__init__` inheritance: you must also initialize the parents with `super().__init__()`
     - objects defined via inheritance are a special version of the parent i.e same capabilities
     - `object` is a parent of all classes in Python 3 (even if not specified)
+- Objects have two string representations:
+    - str(obj) - printable output
+    - repr(obj) - for programmers
+    - The convention for `__repr__` is to return a string that, when fed to `eval()` , will recreate the underlying object.
+- Item access: `__setitem__`, `__getitem__`, `__delitem__`, `__contains__`, `__len__`
+
+- Instances under the hood:
+
+```
+d = Date.__new__(Date, 2012, 12, 21)
+d.__init__(2012, 12, 21)
+```
