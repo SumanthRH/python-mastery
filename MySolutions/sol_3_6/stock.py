@@ -20,7 +20,7 @@ class Stock:
     @shares.setter
     def shares(self, value):
         if not isinstance(value, self._types[1]):
-            raise ValueError(f"Expected a {self._types[0]}")
+            raise ValueError(f"Expected a {self._types[1]}")
         if value < 0:
             raise ValueError("shares must be >=0")
         self._shares = value 
