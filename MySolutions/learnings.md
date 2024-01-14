@@ -152,3 +152,10 @@ immediate parent. It's different from doing `parent_cls.attr`
 - Attribute Access: 
     - When you do `obj.x` -> first, `obj.__getattribute__(x)` is called. This looks for descriptors, checks the instance dictionary, checks bases classes (inheritance), etc.
     If still not found, it will invoke `obj.__getattr__(x)`
+
+## Functions
+
+- Basic design principle: Make functions "self-contained". Avoid hidden side effects. Only operate on passed arguments. Two goals: Simplicity and Predictability. 
+- Prefer keyword arguments while passing optional arguments! 
+    - Can also force it with * : `read_data(filename, *, debug=False)`
+- Don't use mutable values as defaults! Default values are created only once for the whole program.
