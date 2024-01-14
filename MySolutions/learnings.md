@@ -159,3 +159,31 @@ immediate parent. It's different from doing `parent_cls.attr`
 - Prefer keyword arguments while passing optional arguments! 
     - Can also force it with * : `read_data(filename, *, debug=False)`
 - Don't use mutable values as defaults! Default values are created only once for the whole program.
+- Argument Transforms: Design for flexibility
+- Doc Strings: feeds the `help()` command and dev tools
+- Type Hints: Useful for code checkers, documentation, etc.
+- **Return Type**: Have the function cleanly return one result. Just make it a tuple if you really need to
+
+### Concurrency and Futures
+- Functions can execute concurrently in separate threads. They'll have a shared state, with execution in a single interpreter. Recall lessons from your Operating Systems course: a thread is a single sequential path of execution in a program.
+- Futures: Represents a future result to be computed. 
+
+### Functional Programming
+- Callback function: A function passed into another function as an argument, invoked as an action/routine inside the other function.
+- Lambda functions: anonymous functions created on the spot
+- Lambdas can be used to alter function args similar to `functools.partial`
+### Closures
+-  If an inner function is returned as a result, the inner function is known as a "closure".
+- Variables used are accesssible via the `__closure__` special method
+- Only variables that are needed are kept
+- Closure variables are also mutable! Can be used to keep mutable internal state
+- Applications:
+    - Alternate evaluation (e.g., delayed evaluation)
+    - Callback functions- what we saw before
+    - Code creation ("macros")
+### Exception Handling
+- What exceptions to handle? Well, when recovery is possible
+- Never catch all exceptions
+- Wrapping an Exception:
+    - `raise TaskError('It failed') from e`
+- Don't use return codes!
