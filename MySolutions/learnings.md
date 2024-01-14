@@ -149,3 +149,6 @@ immediate parent. It's different from doing `parent_cls.attr`
     -  Every major feature of classes is implemented using descriptors
     - Functions/Methods are descriptors where `__get__()` creates the bound method object
     - Descriptors are one of Python's most powerful customizations (you own the dot) - you get low level control over the dot and can use it to do amazing things.
+- Attribute Access: 
+    - When you do `obj.x` -> first, `obj.__getattribute__(x)` is called. This looks for descriptors, checks the instance dictionary, checks bases classes (inheritance), etc.
+    If still not found, it will invoke `obj.__getattr__(x)`
