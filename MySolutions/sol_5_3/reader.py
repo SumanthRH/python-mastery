@@ -23,15 +23,10 @@ def make_instance(headers, row, cls):
     return cls.from_row(row)
 
 def convert_csv(iterable: Iterable, make_row, headers=None):
-    def process_raw_obj(row):
-        if isinstance(row, bytes):
-            row = row.decode("utf-8")
-        row = row.strip("\n").split(",")
-        return row
+    rows = csv.reader(iterable)
     if headers is None:
-        headers= next(iterable)
-        headers = process_raw_obj(headers)
-    records = list(map(lambda row: make_row(headers, process_raw_obj(row)), iterable))
+        headers= next(rows)
+    records = list(map(lambda row: make_row(headers, row), iterable))
     return records
 
 def read_csv_as_dicts(filename: str, types: List[TypeVar("T")], headers: List[str] =None) -> List[Dict[str, Type]]:

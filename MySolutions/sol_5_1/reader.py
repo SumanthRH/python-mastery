@@ -3,16 +3,11 @@ from typing import List, Iterable, Type, Dict, TypeVar
 from sol_3_6.stock import Stock
 
 def csv_as_dicts(iterable: Iterable, types: List[TypeVar["T"]], headers: List[str] = None) -> List[Dict[str, Type]]:
+    rows = csv.reader(iterable)
     if headers is None:
-        headers= next(iterable)
-        if isinstance(headers, bytes):
-            headers = headers.decode("utf-8")
-        headers = headers.strip("\n").split(",")
+        headers= next(rows)
     records = []
-    for row in iterable:
-        if isinstance(row, bytes):
-            row = row.decode("utf-8")
-        row = row.strip("\n").split(",")
+    for row in rows:
         record = { name: func(val) 
                     for name, func, val in zip(headers, types, row) }
         records.append(record)
@@ -20,13 +15,11 @@ def csv_as_dicts(iterable: Iterable, types: List[TypeVar["T"]], headers: List[st
 
 
 def csv_as_instances(iterable: Iterable, cls: Stock, headers: List[str]=None) -> List[Stock]:
+    rows = csv.reader(iterable)
     if headers is None:
-        headers= next(iterable)
+        headers= next(rows)
     records = []
-    for row in iterable:
-        if isinstance(row, bytes):
-            row = row.decode("utf-8")
-        row = row.strip("\n").split(",")
+    for row in rows:
         record = cls.from_row(row)
         records.append(record)
     return records
