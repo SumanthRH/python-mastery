@@ -143,3 +143,9 @@ immediate parent. It's different from doing `parent_cls.attr`
     2. Rule 2: Method chains must terminate
     3. Rule 3: use `super()` everywhere
         - If multiple inheritance is used, a direct parent call will probably violate the MRO
+- Attribute binding: An extra processing step while accessible attributes of classes.
+    - When an attribute `cls.attr` is accessed on a class, the attribute is checked to see if it holds a _descriptor_ object. 
+    - A descriptor is just an object with get, set and delete methods
+    -  Every major feature of classes is implemented using descriptors
+    - Functions/Methods are descriptors where `__get__()` creates the bound method object
+    - Descriptors are one of Python's most powerful customizations (you own the dot) - you get low level control over the dot and can use it to do amazing things.
