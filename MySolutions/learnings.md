@@ -187,3 +187,35 @@ immediate parent. It's different from doing `parent_cls.attr`
 - Wrapping an Exception:
     - `raise TaskError('It failed') from e`
 - Don't use return codes!
+- Use `AttributeError` when trying to say that an attribute shouldn't be set/ accessed.
+
+## Testing
+- Testing rocks, debugging sucks: Python is dynamic, interpreted - there's no compiler to catch your bugs
+- Assertions/ Contracts: Assertions are runtime checks. Asserts are meant for program invariants, not to validate user inputs!
+    - Can disable via `-O`: `python -O main.py`
+### unittest module
+- First, create a separate file for testing. Then define test classes like `TestMyFunc(unittest.TestCase)` (note that they must inherit from TestCase). 
+- Define testing methods - check method should start with `test`
+- Each test uses special assertions like `assertTrue`, `assertFalse`
+- To run the test, just add `unittest.main()` in the main block. Can now run with `python`!
+
+## Working with Code
+### Advanced function usage
+- Some simple stuff first: 
+    - `func(*args)` accepts any number of arguments
+    - function that accepts any keyword arguments: `func(x, **kwargs)` => extra keywords get passed in a dict
+    - function that accepts any arguments: `func(*args, **kwargs)` `args` captures positional, `kwargs` captures keyword
+### Scoping rules
+- All statements have 2 scopes/ access to two scopes: The global scope of the module in which it is in, and the local scope, the scope private to the function it is in
+- Global variables can be accessed within a function, but it cannot be modified without an explicit `global` keyword. This is important: Globals are already readable! Only before you modify them, you need to specify this keyword
+- `globals()`/`locals()`: Gives you a dictionary with the contents of the global/local scope respectively
+- Scope of the built-ins: The built-ins like `abs()`, `repr()` are in a special module called `builtins`. You can even modify it here (but is ill-advised)
+- Frame Hacking: You can move up the stack frame with `sys._getframe()`. For example, to use the local variables of the caller inside a function, you can do `sys._getframe(1).f_locals`
+
+### Function Objects
+- Functions are also objects in python. You can pass them around, assign them to variables, and also inspect attributes. 
+- Docstring: The first line of a function can be a string. Inspect via `func.__doc__`
+- Type hints/ annotations: Inspect via `func.__annotations__`. Of course, as we are all painfully aware, type annotations do absolutely nothing in Python.
+- You can also just add random attributes to a function! Stored in `func.__dict__`.
+- More helpful attributes: `func.__defaults__`, `func.__code__.co_argcount`, `func.__code__.co_varnames`
+- `inspect` module in python: enables more structured inspection.
