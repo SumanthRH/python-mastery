@@ -1,8 +1,7 @@
-from typing import Any
+from typing import Any, Mapping
 import sys
 import inspect 
 from .validate import Validator, validated
-
 
 def validate_attributes(cls):
     if not issubclass(cls, Structure):
