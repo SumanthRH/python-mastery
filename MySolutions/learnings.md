@@ -243,7 +243,23 @@ for name, val in bound_sig.arguments.items():
 ##  Metaprogramming 
 - Metaprogramming pertains to the problem of writing code that manipulates other code. 
     - Macros, Wrappers, Aspects, etc
+### Decorator
 - Decorator: Function that wraps another function
+    ```
+    def decorator(func):
+        def wrapped(*args, **kwargs):
+            .... do things ....
+            return func(*args', **kwargs')
+        return wrapped
+    ```
 - Typically, you want to continue using the same function that has been "wrapped" by another function. The function has not been "decorated" with extra features.
 - Use a decorator anytime you want to define a kind of "macro" involving function definitions. Ex: execution time
 - Decorators with arguments: The decorator returns a function that accepts arguments and then returns...a wrapper!
+### Class Decorators
+- Class decorators are similar to function decorators: they take in a class and return a class. However, a key difference is that, they return the original class itself, instead of returning a wrapped version like what function decorators do.
+    ```
+    def class_decorator(cls):
+        ... do things ...
+        return cls
+    ```
+- Decoration via Inheritance: base classes can use the `__init_subclass__` special method to observe inheritance and inject some behaviour. 
