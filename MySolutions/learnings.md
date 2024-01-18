@@ -262,7 +262,7 @@ for name, val in bound_sig.arguments.items():
         ... do things ...
         return cls
     ```
-- Decoration via Inheritance: base classes can use the `__init_subclass__` special method to observe inheritance and inject some behaviour. 
+- Decoration via Inheritance: base classes can use the `__init_subclass__` special method to observe inheritance and inject some behaviour. HF uses this to propagate warnings to [subclasses](https://github.com/huggingface/transformers/blob/772307be7649e1333a933cfaa229dc0dec2fd331/src/transformers/models/bart/modeling_bart.py#L871).
 
 ### Types
 - All values have an associated type in python `type(var)`. The "type" returned is usually a callable that can make values of that type. `int('1')`.
@@ -291,3 +291,20 @@ for name, val in bound_sig.arguments.items():
     ```
     type.__call__(cls, *args, **kwargs)
     ```
+- 🤗Accelerate uses metaclasses to add a [key handler](https://github.com/huggingface/accelerate/blob/649e65b542a5740fb5ce663bbd5af45ed426c06f/src/accelerate/commands/menu/input.py#L53) method to different classes that accept keyboard inputs. 
+
+## Iterators, Generators and Coroutines
+- Iterators: have the `__iter__()` and `__next__()` methods
+- Generators: simplify custom iteration
+- Generator functions: wacky
+    - Calling a generator function creates a generator object. It does not start running the function.
+    - Function only executes on `next()`
+    - Generators are one time use. 
+- Resuable generators: Make a class with `__iter__()` that is a generator function! Every use of `__iter__()` makes a new generator
+- Want a custom iterator? Always go for a generator
+- Python uses `__iter__` for unpacking as well! Ex:  `arg1, arg2, arg3 = obj`
+
+### Generator Pipelines
+- Producer-> Processors -> Consumer
+- Intermediate processing stages simultaneously
+consume and produce items. These can modify the data items, filter/discard items, etc
