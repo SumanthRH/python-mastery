@@ -263,3 +263,21 @@ for name, val in bound_sig.arguments.items():
         return cls
     ```
 - Decoration via Inheritance: base classes can use the `__init_subclass__` special method to observe inheritance and inject some behaviour. 
+
+### Types
+- All values have an associated type in python `type(var)`. The "type" returned is usually a callable that can make values of that type. `int('1')`.
+- Classes define new types. The class is the type for new instances created. THe class is also a callable to create instances of that type.
+- Classes are instances of `type`! `type(cls)` returns `<class type>`
+- Types are represented by their own classes - `type`! This creates new type objects!
+- The internals of class definitions:
+    1. The body of the class is captured as a string
+    2. A dictionary is created (`.__dict__`) with some metadata
+    3. Class body is executed in the dict `exec(body, globals(), __dict__)`
+    4. Class is constructed as `type(name, bases, dict)`
+- The class is nothing more than this: The name, the base classes it's inheriting from, and the dictionary!
+
+### Metaclasses
+- A class that creates classes is called a metaclass.
+- Python provides a metaclass hook that allows you to override the class creation steps 
+    - `metaclass` keyword argument (`class Spam(metaclass=type)`) to specify the class to create the class. By default, it is `type` for all classes
+    - New `metaclass`: Inherit from `type` and customize `__new__`, `__prepare__`. Then, create a new root-object (similar to `object`). Now, you can inherit from this.
