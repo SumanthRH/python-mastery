@@ -281,3 +281,13 @@ for name, val in bound_sig.arguments.items():
 - Python provides a metaclass hook that allows you to override the class creation steps 
     - `metaclass` keyword argument (`class Spam(metaclass=type)`) to specify the class to create the class. By default, it is `type` for all classes
     - New `metaclass`: Inherit from `type` and customize `__new__`, `__prepare__`. Then, create a new root-object (similar to `object`). Now, you can inherit from this.
+- Class creation:
+    ```
+    type.__prepare__(name, bases)
+    type.__new__(type, name, bases, dict)
+    type.__init__(cls, name, bases, dict)
+    ```
+- Instance creation:
+    ```
+    type.__call__(cls, *args, **kwargs)
+    ```
