@@ -110,6 +110,7 @@ structures.
 `__enter__()` and `__exit__()`
 
 - Handler classes:  Code will implement a general purpose algorithm, but will defer certain steps to a separately supplied handler object (like the formatter implemented in 3.5)
+- Be careful: `isinstance` vs `issubclass`
 
 ## Advanced Inheritance and Mixins 
 - _Inheritance is a tool for code reuse_
@@ -219,3 +220,30 @@ immediate parent. It's different from doing `parent_cls.attr`
 - You can also just add random attributes to a function! Stored in `func.__dict__`.
 - More helpful attributes: `func.__defaults__`, `func.__code__.co_argcount`, `func.__code__.co_varnames`
 - `inspect` module in python: enables more structured inspection.
+
+### `eval` and `exec`
+- `eval`: Evaluates arbitrary expressions (like `3x**2 + 2`)
+- `exec`: Executes arbitrary statements (like `print(x)`)
+- `exec`: Modifications to local scope are lost! `exec(x=10; print(x))` doesn't modify `x` in locals()
+- To make sure modifications last, exec also gives optional arguments: `exec(code [,globals [,locals]])`
+- Both of these are meant to be used with extreme care because, well, the expressions and statements can be arbitrary (security??) and interaction with scoping/variables is tricky.
+- Python's `namedtuple` uses `eval` internally! (Correction in pdf: it's `eval`, not `exec`)
+
+### Callable Objects
+- Any object with a `__call__` special method (emulates functions)
+- Signature binding is lovely:
+```
+sig = inspect.signature(self.func)
+bound_sig = sig.bind(*args, **kwargs) # Binds the passed args and kwargs to function arguments
+for name, val in bound_sig.arguments.items():
+    <do things>
+```
+- There are caveats when you use signature binding directly with methods! (Because of the `self` argument)
+
+##  Metaprogramming 
+- Metaprogramming pertains to the problem of writing code that manipulates other code. 
+    - Macros, Wrappers, Aspects, etc
+- Decorator: Function that wraps another function
+- Typically, you want to continue using the same function that has been "wrapped" by another function. The function has not been "decorated" with extra features.
+- Use a decorator anytime you want to define a kind of "macro" involving function definitions. Ex: execution time
+- Decorators with arguments: The decorator returns a function that accepts arguments and then returns...a wrapper!
