@@ -6,7 +6,7 @@ class mytype(type):
         print("Base classes   :", bases)
         print("Attributes     :", list(__dict__))
         # print("sup: ", mytype.__mro__, dir(super()))
-        return super().__new__(meta, name, bases, __dict__)
+        return super().__new__(meta, name, bases, __dict__) # type: ignore
 
 class myobject(metaclass=mytype):
     pass

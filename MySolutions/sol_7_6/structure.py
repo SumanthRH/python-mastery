@@ -34,7 +34,7 @@ class StructureMeta(type):
     def __new__(meta, name, bases, methods):
         methods = methods.maps[0]
         print(methods)
-        return super().__new__(meta, name, bases, methods)
+        return super().__new__(meta, name, bases, methods) # type: ignore
 
 
 class Structure(metaclass=StructureMeta):
