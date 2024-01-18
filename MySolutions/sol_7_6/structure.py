@@ -69,7 +69,7 @@ class Structure(metaclass=StructureMeta):
     def from_row(cls, row):
         values = [func(val) for func, val in zip(cls._types, row)]
         return cls(*values)
-    
+     
 def typed_structure(clsname, **validators):
     cls = type(clsname, (Structure, ),validators)
     return cls

@@ -33,7 +33,7 @@ class TestStock(unittest.TestCase):
     def test_repr(self):
         s = Stock("GOOG", 100, 49.1954)
         s_repr = repr(s)
-        self.assertEqual(s_repr, "Stock('GOOG', 100, 49.195)")
+        self.assertEqual(s_repr, "Stock('GOOG', 100, 49.1954)")
 
     def test_eq(self):
         a = Stock("GOOG", 100, 49.1954)
