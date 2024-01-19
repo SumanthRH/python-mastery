@@ -308,3 +308,9 @@ for name, val in bound_sig.arguments.items():
 - Producer-> Processors -> Consumer
 - Intermediate processing stages simultaneously
 consume and produce items. These can modify the data items, filter/discard items, etc
+
+### Coroutine
+- `x = yield`: you get a coroutine! This is a function to which you can send values.
+- `func.send("hey")`: sent values are returned by `yield` and execution continues from there. 
+- Coroutines are similar to generators: When you call one, nothing happens. All coroutines must be primed first with  with `.send(None)`. This lands execution at the location of the first yield expresssion. At this point, it can receive a value!
+- You can define intermediate stages/ processors as coroutines! They have a `yield` and also call `.send()` on the next stage!
