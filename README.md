@@ -1,3 +1,5 @@
+My solutions to David Beazley's Advanced Python Mastery course. You can find my notes at [learnings.md](./learnings.md). Original Readme:
+
 # Advanced Python Mastery
 
 A course by David Beazley (https://www.dabeaz.com)  
