@@ -314,3 +314,13 @@ consume and produce items. These can modify the data items, filter/discard items
 - `func.send("hey")`: sent values are returned by `yield` and execution continues from there. 
 - Coroutines are similar to generators: When you call one, nothing happens. All coroutines must be primed first with  with `.send(None)`. This lands execution at the location of the first yield expresssion. At this point, it can receive a value!
 - You can define intermediate stages/ processors as coroutines! They have a `yield` and also call `.send()` on the next stage!
+### Generator Control Flow and Managed Generators
+- Generators have support for forced termination (`.close()`) and exception handling (`.throw()`)
+    - `.close()` raises `GeneratorExit` at `yield`
+    - `.throw(Error, "error str")` raises an exception at `yield`
+- A generator function cannot execute by itself (need a for loop or a send())
+- The `yield` statement represents the point of preemption. This is where executed last stopped
+- Managed generators: A manager coordinates the execution of a collection of generators.
+    - Concurrency, Actors, Event simulation
+- Python provides a handy `yield from` syntax to delegate generation (i.e writing the for loop/`send()`) to outer code that calls this.
+- Async: `await` just looks like alternate syntax for coroutines (`send`)
