@@ -1,7 +1,43 @@
-
 # Learnings
 These are some notes and comments I've taken while going through the book. Many sentences here are copied verbatim from David's slides since I found them to be great summaries for different concepts.
 
+## Table of Contents
+
+<!-- toc -->
+
+- [Python Essentials](#python-essentials)
+- [Classes](#classes)
+- [Python Encapsulation](#python-encapsulation)
+- [Inheritance](#inheritance)
+- [Advanced Inheritance and Mixins](#advanced-inheritance-and-mixins)
+- [Inside Python Objects](#inside-python-objects)
+- [Functions](#functions)
+  * [Concurrency and Futures](#concurrency-and-futures)
+  * [Functional Programming](#functional-programming)
+  * [Closures](#closures)
+  * [Exception Handling](#exception-handling)
+- [Testing](#testing)
+  * [unittest module](#unittest-module)
+- [Working with Code](#working-with-code)
+  * [Advanced function usage](#advanced-function-usage)
+  * [Scoping rules](#scoping-rules)
+  * [Function Objects](#function-objects)
+  * [`eval` and `exec`](#eval-and-exec)
+  * [Callable Objects](#callable-objects)
+- [Metaprogramming](#metaprogramming)
+  * [Decorator](#decorator)
+  * [Class Decorators](#class-decorators)
+  * [Types](#types)
+  * [Metaclasses](#metaclasses)
+- [Iterators, Generators and Coroutines](#iterators-generators-and-coroutines)
+  * [Generator Pipelines](#generator-pipelines)
+  * [Coroutine](#coroutine)
+  * [Generator Control Flow and Managed Generators](#generator-control-flow-and-managed-generators)
+- [Modules and Packages](#modules-and-packages)
+
+<!-- tocstop -->
+
+## Python Essentials
 - Exercise 2.1: Reading data as a single string vs. reading data with f.readlines() has a huge difference in memory consumption - 10 MB vs 40 MB for an example file. 
 Point to ponder: what might be the source of that extra overhead?
     - > My guess is the additional information stored in a list data structure. 
@@ -324,3 +360,21 @@ consume and produce items. These can modify the data items, filter/discard items
     - Concurrency, Actors, Event simulation
 - Python provides a handy `yield from` syntax to delegate generation (i.e writing the for loop/`send()`) to outer code that calls this.
 - Async: `await` just looks like alternate syntax for coroutines (`send`)
+
+## Modules and Packages
+- The very basic: Every source file is a module. The import module will load AND execute a module.
+- Modules are a namespace for the definitions inside, and as expected, a layer over a Python dictionary (the globals of that module).
+- Special variables: `__file__` (name of source file), `__name__` (name of the module) and `__doc__`
+    - THe main module: `__name__ == __main__` 
+- `import foo` in `bar.py`:  Executes `foo` and adds a reference to `foo` in `bar.__dict__`
+    - `from foo import func` : `foo` still executes, but only `func` is added to `bar`'s dictionary 
+    - `from foo import *`: All names that don't start with underscore get added to `bar`
+- Each module is loaded only once. Use `sys.modules` to get a list of loaded modules.
+- Module reloading (with `importlib`): This is not advised, since existing instances of classes will still use old code, specific names imported `from foo import name` don't get updated, and can break typechecks/ code with `super()`
+- Module import basics: Relative imports of submodules don't work - imports are always absolute
+    - Use "." prefix
+- Packages: `__package__` (name of the enclosing package), `__path__` (search path for subcomponents)
+- Main use of `__init__.py`: stitching together multiple source files into a "unified" top-level import
+- Controlling exports: Submodules should define `__all__` to control `from module import *`. This is useful in `__init__`!
+- `__main__.py` designates an entrypoint for a package! Makes the module executable `python -m module`
+- Inject dynamic import magic with `__import__` or `importlib`. Can do things like `__import__(f"{__package__}.formats.{format}")` (this imports a file from `.formats` if present)
