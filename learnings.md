@@ -1,5 +1,5 @@
 # Learnings
-These are some notes and comments I've taken while going through the book. Many sentences here are copied verbatim from David's slides since I found them to be great summaries for different concepts.
+These are some notes and comments I've taken while going through the book. Many sentences here are copied verbatim from David's slides since I found them to be great summaries for different concepts. You can find my solutions [here](/MySolutions/).
 
 ## Table of Contents
 
